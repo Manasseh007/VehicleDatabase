@@ -6,6 +6,7 @@ import SmartVehicleCRUD.smartVehicle.VehicleTracking.Services.VehicleServiceImpl
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class VehicleController {
     }
 
     @PostMapping
+    //@Secured("ADMIN_USER")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) {
         Vehicle createdVehicle = vehicleService.createVehicle(vehicle);
         return new ResponseEntity<>(createdVehicle, HttpStatus.CREATED);

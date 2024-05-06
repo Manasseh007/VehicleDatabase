@@ -20,6 +20,37 @@ CREATE TABLE Locations (
     timestamp DATETIME,
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
 );
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    enabled BOOLEAN NOT NULL DEFAULT true
+);
+
+CREATE TABLE authorities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    authority VARCHAR(50) NOT NULL,
+    FOREIGN KEY (username) REFERENCES users(username)
+);
+
+INSERT INTO users (username, password)
+VALUES ('John', '{noop}test123');
+
+INSERT INTO users (username, password)
+VALUES ('Meluleki', '{noop}mel123');
+
+INSERT INTO users (username, password)
+VALUES ('Terrence', '{noop}abc123');
+
+INSERT INTO authorities (username, authority)
+VALUES ('John', 'ROLE_USER');
+
+INSERT INTO authorities (username, authority)
+VALUES ('Meluleki', 'ADMIN_USER');
+
+INSERT INTO authorities (username, authority)
+VALUES ('Terrence', 'ROLE_USER');
 
 INSERT INTO vehicles (make, model, registration_date, registration_number, vehicle_location, year)
 VALUES ('Toyota', 'Camry', '2024-01-15', 'NUZ 2123','Gauteng', 2020);
